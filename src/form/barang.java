@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author chatgpt
+ * @author sahrul
  */
 public class barang extends javax.swing.JFrame {
     private Connection conn = new koneksi().openKoneksi();
@@ -40,15 +40,15 @@ public class barang extends javax.swing.JFrame {
         String sql = "Select * from barang";
         
          try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-           ResultSet kontol = pstmt.executeQuery(sql);
+           ResultSet barang = pstmt.executeQuery(sql);
             
-           while (kontol.next()){
+           while (barang.next()){
                model.addRow(new Object[]{
-                   kontol.getString("kd_barang"),
-                   kontol.getString("nama_barang"),
-                   kontol.getDouble("harga_b"),
-                   kontol.getDouble("harga_j"),
-                   kontol.getInt("stok")
+                   barang.getString("kd_barang"),
+                   barang.getString("nama_barang"),
+                   barang.getDouble("harga_b"),
+                   barang.getDouble("harga_j"),
+                   barang.getInt("stok")
 
                });
            }
@@ -344,8 +344,9 @@ public class barang extends javax.swing.JFrame {
         Number beliValue = (Number) txthargabeli.getValue();
         Number jualValue = (Number) txthargajual.getValue();
 
-        Double hargaBeliStr = beliValue != null ? beliValue.doubleValue() : 0.0;
-        Double hargaJualStr = jualValue != null ? jualValue.doubleValue() : 0.0;
+        Double hargaBeliStr = Double.parseDouble(txthargabeli.getText().trim());
+        Double hargaJualStr = Double.parseDouble(txthargajual.getText().trim());
+
         int stokValue = (int) txtstock.getValue();
         String jenis = null;
 
@@ -373,13 +374,14 @@ public class barang extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-          String kdBarang = txtid.getText().trim();
+        String kdBarang = txtid.getText().trim();
         String namaBarang = txtnama.getText().trim();
         Number beliValue = (Number) txthargabeli.getValue();
         Number jualValue = (Number) txthargajual.getValue();
 
-        Double hargaBeliStr = beliValue != null ? beliValue.doubleValue() : 0.0;
-        Double hargaJualStr = jualValue != null ? jualValue.doubleValue() : 0.0;
+        Double hargaBeliStr = Double.parseDouble(txthargabeli.getText().trim());
+        Double hargaJualStr = Double.parseDouble(txthargajual.getText().trim());
+
         int stokValue = (int) txtstock.getValue();
         String jenis = null;
 
